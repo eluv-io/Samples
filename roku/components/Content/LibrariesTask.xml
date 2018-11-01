@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="LibrariesTask" extends="Task" >
+  <interface>
+    <!-- Field to issue a request to the handler -->
+  	<field id="request" type="assocarray"/>
+    <!-- Contains the response content -->
+    <field id="content" type="array"/>
+    <!-- The # of rows to populate -->
+    <field id="numRows" type="integer"/>
+  </interface>
+
+  <script type="text/brightscript" uri="pkg:/components/Content/LibrariesTask.brs"/>
+</component>

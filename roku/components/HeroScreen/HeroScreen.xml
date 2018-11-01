@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016 Roku Corp.  All Rights Reserved. -->
+
+<component name="HeroScreen" extends="Group" initialFocus="RowList">
+
+  <children>
+    <!-- For transition animation -->
+    <FadingBackground
+      id="Background"
+      width="1920"
+      height="1080"
+      color="0x000000"
+      ShadeOpacity="0.9"
+      visible = "false"
+      />
+
+    <Rectangle
+      id="blackback"
+      color="0x000000FF"
+      width="1920"
+      height="1080"
+      translation="[0,0]" />
+
+    <Poster
+      id="BackgroundPlayer"
+      uri="pkg:/images/background2.png"
+      translation="[0, 0]"
+      width="1920"
+      height="1080"
+      loadDisplayMode="scaleToFill"
+      opacity="0.2"
+      />
+
+    <!-- The main content -->
+    <RowList
+	    id="RowList"
+      itemComponentName="customItem"
+      focusXOffset="[80]"
+      itemSize="[1920,500]"
+      numRows="3"
+      rowFocusAnimationStyle="floatingFocus"
+      rowItemSize="[[400,350]]"
+      rowItemSpacing="[[20,30]]"
+      rowLabelOffset="[[80,20]]"
+      rowLabelFont="font:MediumBoldSystemFont"
+      rowLabelColor="#80ffff"
+      showRowLabel="[true,true]"
+      showRowCounter="[true,true,true,false]"
+      translation="[0,200]"/>
+
+    <!-- For transition animation -->
+    <Poster
+      translation="[0,1000]"
+      uri="pkg:/images/BG_dark_down.png"
+      width="2000"
+      height="95" />
+  </children>
+
+  <interface>
+    <!-- Grid Content Node -->
+    <field id="content" type="node" alias="RowList.content" />
+
+    <!-- Row item selection handler -->
+    <field id="rowItemSelected" type="intarray" alias="RowList.rowItemSelected" alwaysnotify="true"/>
+
+    <!-- Row item focused handler - sets background image uri and focusedContent field -->
+    <field id="itemFocused" type="intarray" alias="RowList.rowItemFocused" onChange="OnItemFocused"/>
+
+    <!-- Interface to focused item (Content Node) -->
+    <field id="focusedContent"  type="node"/>
+
+    <!-- # of requests that have bad/no content (not a 200 response) -->
+    <field id="numBadRequests" type="integer"/>
+  </interface>
+
+  <script type="text/brightscript" uri="pkg:/components/HeroScreen/HeroScreen.brs" />
+
+</component>
