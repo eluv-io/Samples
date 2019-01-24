@@ -8,18 +8,34 @@
 
     <![CDATA[
 
+    sub onStateChanged(message as Object)
+      print message.getData()
+      if message.getData() = "error"
+        print m.top.findNode("exampleVideo").errorMsg
+      end if
+    end sub
+
     sub init()
       videocontent = createObject("RoSGNode", "ContentNode")
 
+      drmParams = createObject("roAssociativeArray")
+      drmParams.keySystem = "Widevine"
+      drmParams.licenseServerURL = "https://cwip-shaka-proxy.appspot.com/no_auth"
+      videocontent.drmParams = drmParams
+
       videocontent.title = "Example Video"
-      videocontent.streamformat = "hls"
-      videocontent.url = "https://www.radiantmediaplayer.com/media/rmp-segment/bbb-abr-aes/playlist.m3u8"
+      ' videocontent.streamformat = "hls"
+      ' videocontent.url = "https://www.radiantmediaplayer.com/media/rmp-segment/bbb-abr-aes/playlist.m3u8"
+      videocontent.streamformat = "dash"
+      videocontent.url = "https://storage.googleapis.com/shaka-demo-assets/angel-one-widevine/dash.mpd"
 
       video = m.top.findNode("exampleVideo")
       video.content = videocontent
 
       video.setFocus(true)
       video.control = "play"
+
+      video.observeField("state", "onStateChanged")     
     end sub
 
     ]]>
